@@ -11,21 +11,22 @@ end
 
 def print_headers
 # Print "Sales Report" in ascii art
-	puts("Sales Report\n")
+	$report_file.write("Sales Report\n")
 # Print today's date
-puts(Time.now.strftime("%m/%d/%Y"))
+$report_file.write(Time.now.strftime("%m/%d/%Y"))
 end
 
 def print_products
 # Print "Products" in ascii art
-puts("                     _            _       ")
-puts("                    | |          | |      ")
-puts(" _ __  _ __ ___   __| |_   _  ___| |_ ___ ")
-puts("| '_ \\| '__/ _ \\ / _` | | | |/ __| __/ __|")
-puts("| |_) | | | (_) | (_| | |_| | (__| |_\\__ \\")
-puts("| .__/|_|  \\___/ \\__,_|\\__,_|\\___|\\__|___/")
-puts("| |                                       ")
-puts("|_|                                       ")
+$report_file.write("\n")
+$report_file.write("                     _            _       \n")
+$report_file.write("                    | |          | |      \n")
+$report_file.write(" _ __  _ __ ___   __| |_   _  ___| |_ ___ \n")
+$report_file.write("| '_ \\| '__/ _ \\ / _` | | | |/ __| __/ __|\n")
+$report_file.write("| |_) | | | (_) | (_| | |_| | (__| |_\\__ \\\n")
+$report_file.write("| .__/|_|  \\___/ \\__,_|\\__,_|\\___|\\__|___/\n")
+$report_file.write("| |                                       \n")
+$report_file.write("|_|                                       \n")
 end
 
 
@@ -43,31 +44,31 @@ def calculate_products(products)
     total_sale = 0
     avg_sale = 0
     discount = 0
-    puts("Name: #{toy["title"]}")
-    puts("Retail price of the toy: $#{toy["full-price"]}")
-    puts("Total number of purchases: #{toy["purchases"].length}")
+    $report_file.write("Name: #{toy["title"]}\n")
+    $report_file.write("Retail price of the toy: $#{toy["full-price"]}\n")
+    $report_file.write("Total number of purchases: #{toy["purchases"].length}\n")
     #Calculating the total sale for each product
       toy["purchases"].each do |sale|
       	total_sale = total_sale + sale["price"]
       end    
-  	puts("Total amount of sales: $#{total_sale}")
+  	$report_file.write("Total amount of sales: $#{total_sale}\n")
   	avg_sale = total_sale/toy["purchases"].length
-  	puts("Avg. price that the toy sold for: $#{avg_sale}")
+  	$report_file.write("Avg. price that the toy sold for: $#{avg_sale}\n")
   	discount = toy["full-price"].to_f - avg_sale
-  	puts("Average discount:$#{discount}")
-  	puts("Average discount percentage: #{((discount*100)/toy["full-price"].to_f).round(2)}")
-  	puts("\n")
+  	$report_file.write("Average discount:$#{discount}\n")
+  	$report_file.write("Average discount percentage: #{((discount*100)/toy["full-price"].to_f).round(2)}\n")
+  	$report_file.write("\n")
   	end
 end
 
 def print_brands
 # Print "Brands" in ascii art
-	puts(" _                         _     ")
-	puts("| |                       | |    ")
-	puts("| |__  _ __ __ _ _ __   __| |___ ")
-	puts("| '_ \\| '__/ _` | '_ \\ / _` / __|")
-	puts("| |_) | | | (_| | | | | (_| \\__ \\")
-	puts("|_.__/|_|  \\__,_|_| |_|\\__,_|___/")
+	$report_file.write(" _                         _     \n")
+	$report_file.write("| |                       | |    \n")
+	$report_file.write("| |__  _ __ __ _ _ __   __| |___ \n")
+	$report_file.write("| '_ \\| '__/ _` | '_ \\ / _` / __|\n")
+	$report_file.write("| |_) | | | (_| | | | | (_| \\__ \\\n")
+	$report_file.write("|_.__/|_|  \\__,_|_| |_|\\__,_|___/\n")
 end
 
 def calculate_brands(products)
@@ -97,7 +98,7 @@ len.times do
   total_revenue = 0.00
   #how many times a brand occurs - to calculate average
   count = 0
-  puts brand_unique[i]["brand"]
+  $report_file.write(brand_unique[i]["brand\n"])
   products["items"].each do |toy|
     if toy["brand"] == brand_unique[i]["brand"]
       stock = stock + toy["stock"]
@@ -110,11 +111,11 @@ len.times do
     end 
 
   end
-  puts("Total stock: #{stock}")
-  puts("Average price of the brand's toy: $#{total_price.round(2)/count}")
-  puts("Total revenue of all the brand's toy sales combined: $#{total_revenue.round(2)}")
+  $report_file.write("Total stock: #{stock}\n")
+  $report_file.write("Average price of the brand's toy: $#{total_price.round(2)/count}\n")
+  $report_file.write("Total revenue of all the brand's toy sales combined: $#{total_revenue.round(2)}\n")
   i = i + 1
-  puts("\n")
+  $report_file.write("\n")
 end
 
 end
