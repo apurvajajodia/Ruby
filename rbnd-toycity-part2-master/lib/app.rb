@@ -1,6 +1,5 @@
 require 'json'
 def setup_files
-	puts "inside setup files"
 	path = File.join(File.dirname(__FILE__), '../data/products.json')
 	file = File.read(path)
 	$products_hash = JSON.parse(file)
@@ -129,8 +128,6 @@ def create_report
 	calculate_brands($products_hash)
 end
 
-puts " starting from mail"
-puts "calling setup file"
 setup_files
 create_report
 
